@@ -39,6 +39,28 @@ def clicar_se_presente(page, selector):
         # Caso o botão não seja encontrado, ignora e continua
         print('Botão "Pular anúncio" não encontrado, etapa ignorada.')
 
+def tocar_video_automaticamente(termo_de_busca):
+
+        # Digite o termo de busca no campo de pesquisa e pressione Enter
+        pagina.fill('input#search', termo_de_busca)
+        pagina.keyboard.press('Enter')
+        
+        # Aguarde os resultados carregarem
+        pagina.wait_for_selector('ytd-video-renderer')
+        
+        # Clique no primeiro vídeo dos resultados
+        primeiro_video = pagina.query_selector('ytd-video-renderer a#video-title')
+        if primeiro_video:
+            primeiro_video.click()
+            print('Vídeo tocando.')
+        else:
+            print('Nenhum vídeo encontrado.')
+
+        # Defina o termo de busca desejado
+        termo_de_busca = 'SEU_TERMO_DE_BUSCA'
+
+        tocar_video_automaticamente(termo_de_busca)
+
 with sync_playwright() as p:
     navegador = p.chromium.launch(headless=False)
     pagina = navegador.new_page()
