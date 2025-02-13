@@ -49,3 +49,6 @@ with sync_playwright() as p:
     # Tempo para o vídeo rodar antes de fechar o navegador
     time.sleep(120)
     navegador.close()
+
+    #tarefa pra casa
+    #Fazer um adblock
